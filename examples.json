@@ -1,0 +1,70 @@
+[
+  {
+    "label": "Adulto de 70 kg com 40% de SCQ, 4 mL: 11.200 mL (5.600 em 8 h = 700 mL/h; 5.600 em 16 h = 350 mL/h)",
+    "input": {
+      "peso": 70,
+      "scq": 40,
+      "ml": "4"
+    },
+    "expected": {
+      "raw": {
+        "total": 11200,
+        "h8": 5600,
+        "rate8": 700,
+        "rate16": 350
+      },
+      "level": "info"
+    },
+    "originalInput": {
+      "peso": 70,
+      "scq": 40,
+      "ml": "4"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "Criança de 20 kg com 25% de SCQ, 3 mL: 1.500 mL (93,75 mL/h nas primeiras 8 h)",
+    "input": {
+      "peso": 20,
+      "scq": 25,
+      "ml": "3"
+    },
+    "expected": {
+      "raw": {
+        "total": 1500,
+        "rate8": 93.75,
+        "rate16": 46.875
+      },
+      "verdict": "1 mL/kg/h"
+    },
+    "originalInput": {
+      "peso": 20,
+      "scq": 25,
+      "ml": "3"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "Adulto de 80 kg, 30%, 2 mL, chegando 2 h após: 4.800 mL; 2.400 mL nas 6 h restantes = 400 mL/h",
+    "input": {
+      "peso": 80,
+      "scq": 30,
+      "ml": "2",
+      "horas": 2
+    },
+    "expected": {
+      "raw": {
+        "total": 4800,
+        "h8": 2400,
+        "ratenow": 400
+      }
+    },
+    "originalInput": {
+      "peso": 80,
+      "scq": 30,
+      "ml": "2",
+      "horas": 2
+    },
+    "expandedZeroOptions": []
+  }
+]

@@ -1,0 +1,207 @@
+{
+  "tool": {
+    "id": "formula-de-parkland",
+    "title": "Fórmula de Parkland",
+    "short": "Reposição volêmica no grande queimado",
+    "desc": "Fórmula de Parkland: volume de Ringer lactato nas primeiras 24 h do grande queimado, com a divisão em 8 e 16 horas e a vazão para cada fase.",
+    "lead": "Calcula o volume de cristaloide das primeiras 24 horas após a queimadura pelo peso e pela superfície corporal queimada, e a vazão de cada fase.",
+    "spec": [
+      "cirurgia-plastica",
+      "medicina-de-emergencia",
+      "medicina-intensiva",
+      "anestesiologia",
+      "pediatria"
+    ],
+    "tier": 1,
+    "fields": [
+      [
+        "peso",
+        "Peso",
+        "num",
+        {
+          "min": 2,
+          "max": 250,
+          "step": 0.1,
+          "unit": "kg",
+          "ph": "70"
+        }
+      ],
+      [
+        "scq",
+        "Superfície corporal queimada (2º e 3º graus)",
+        "num",
+        {
+          "min": 1,
+          "max": 100,
+          "step": 0.5,
+          "unit": "%",
+          "ph": "30"
+        }
+      ],
+      [
+        "ml",
+        "Volume por kg por % de SCQ",
+        "radio",
+        {
+          "opts": {
+            "2": "2 mL (Brooke modificada)",
+            "3": "3 mL (criança)",
+            "4": "4 mL (Parkland)"
+          }
+        }
+      ],
+      [
+        "horas",
+        "Horas desde a queimadura",
+        "num",
+        {
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "unit": "h",
+          "ph": "2",
+          "opt": true
+        }
+      ]
+    ],
+    "formula": "<p><strong>Volume em 24 h</strong> = mL × peso (kg) × SCQ (%), de Ringer lactato. <strong>Metade nas primeiras 8 horas</strong> contadas desde a queimadura (não desde a chegada) e a outra metade nas 16 horas seguintes.</p><p>Se o atendimento começa com atraso, a primeira metade é distribuída nas horas que faltam para completar 8 h.</p>",
+    "table": [
+      [
+        "Grupo",
+        "Volume inicial",
+        "Meta de diurese"
+      ],
+      [
+        "Adulto",
+        "2 a 4 mL/kg/%SCQ",
+        "0,5 mL/kg/h (30 a 50 mL/h)"
+      ],
+      [
+        "Criança &lt; 30 kg",
+        "3 mL/kg/%SCQ + manutenção com glicose",
+        "1 mL/kg/h"
+      ],
+      [
+        "Lesão elétrica ou mioglobinúria",
+        "4 mL/kg/%SCQ",
+        "1 mL/kg/h até clarear a urina"
+      ]
+    ],
+    "tips": [
+      "A fórmula é só o <strong>ponto de partida</strong>: ajuste a vazão de hora em hora pela diurese (sonda vesical), em passos de 20 a 30%.",
+      "O excesso de volume (\"fluid creep\") causa síndrome compartimental abdominal e de membros e piora a função pulmonar: diretrizes atuais tendem a começar com 2 a 3 mL em adultos.",
+      "Em crianças pequenas, acrescente soro de manutenção com glicose ao volume da fórmula: a reserva de glicogênio é baixa.",
+      "A reposição formal costuma ser indicada com SCQ ≥ 20% no adulto (15% em alguns protocolos) e ≥ 10% na criança. Estime a SCQ na ferramenta Lund-Browder.",
+      "Lesão inalatória, queimadura elétrica e atraso no início da reposição aumentam a necessidade de volume."
+    ],
+    "sources": [
+      [
+        "Baxter CR, Shires T. Physiological response to crystalloid resuscitation of severe burns. Ann N Y Acad Sci, 1968.",
+        "https://doi.org/10.1111/j.1749-6632.1968.tb14738.x"
+      ],
+      [
+        "ISBI Practice Guidelines Committee. ISBI Practice Guidelines for Burn Care. Burns, 2016.",
+        "https://doi.org/10.1016/j.burns.2016.05.013"
+      ]
+    ],
+    "cases": [
+      [
+        "Adulto de 70 kg com 40% de SCQ, 4 mL: 11.200 mL (5.600 em 8 h = 700 mL/h; 5.600 em 16 h = 350 mL/h)",
+        {
+          "peso": 70,
+          "scq": 40,
+          "ml": "4"
+        },
+        {
+          "raw": {
+            "total": 11200,
+            "h8": 5600,
+            "rate8": 700,
+            "rate16": 350
+          },
+          "level": "info"
+        }
+      ],
+      [
+        "Criança de 20 kg com 25% de SCQ, 3 mL: 1.500 mL (93,75 mL/h nas primeiras 8 h)",
+        {
+          "peso": 20,
+          "scq": 25,
+          "ml": "3"
+        },
+        {
+          "raw": {
+            "total": 1500,
+            "rate8": 93.75,
+            "rate16": 46.875
+          },
+          "verdict": "1 mL/kg/h"
+        }
+      ],
+      [
+        "Adulto de 80 kg, 30%, 2 mL, chegando 2 h após: 4.800 mL; 2.400 mL nas 6 h restantes = 400 mL/h",
+        {
+          "peso": 80,
+          "scq": 30,
+          "ml": "2",
+          "horas": 2
+        },
+        {
+          "raw": {
+            "total": 4800,
+            "h8": 2400,
+            "ratenow": 400
+          }
+        }
+      ]
+    ],
+    "batch": "cirurgia-sentidos",
+    "kind": "Calculadora",
+    "config": null,
+    "areaId": "cirurgia-sentidos",
+    "clinicalReview": "pending",
+    "sourceReview": "pending",
+    "sourceFile": "app/content/ferramentas/cirurgia-sentidos.php",
+    "arithmeticTest": {
+      "status": "passed",
+      "testedAt": "2026-09-25",
+      "total": 3,
+      "passed": 3,
+      "failures": []
+    },
+    "independentArithmeticTest": {
+      "status": "not-tested",
+      "testedAt": null,
+      "total": 0,
+      "passed": 0,
+      "cases": []
+    }
+  },
+  "review": {
+    "id": "formula-de-parkland",
+    "status": "restricted",
+    "reason": "O ZIP prioriza Parkland 4 mL e calcula vazão ao chegar tarde sem perguntar volume já infundido. ABA 2024 recomenda início com 2 mL/kg/% em adultos com queimaduras ≥20% SCQ. Suspender cálculo terapêutico até balanço prévio, população e protocolo explícitos.",
+    "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38051821/",
+    "sourceTitle": "American Burn Association Clinical Practice Guidelines on Burn Shock Resuscitation",
+    "sourceDate": "2024 (publicação; online em 2023)",
+    "publisherRegion": "Estados Unidos / ABA",
+    "checkedAt": "2026-09-25",
+    "clinicalValidation": "not-performed",
+    "suppressLegacyFormula": true,
+    "formulaOverride": "Parkland histórico: 4 mL × peso (kg) × % de superfície queimada em 24 h. Não usar esta expressão como prescrição automática; volume prévio, tempo, população e monitorização alteram a conduta.",
+    "replacementReadings": [
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38051821/",
+        "title": "American Burn Association Clinical Practice Guidelines on Burn Shock Resuscitation",
+        "date": "2024 (publicação; online em 2023)",
+        "region": "Estados Unidos / ABA"
+      }
+    ]
+  },
+  "sourceFile": {
+    "path": "app/content/ferramentas/cirurgia-sentidos.php",
+    "sha256": "21fc91a9a8187a66496f68c2ac8fbdd20a65ceeea519687c963b857f72640866",
+    "bytes": 89063
+  },
+  "clinicalValidation": "not-performed"
+}
